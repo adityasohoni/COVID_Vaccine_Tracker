@@ -15,7 +15,7 @@ headers = {
 
 
 while(1):
-    time.sleep(10)
+    time.sleep(3.4)
     date_var = date.today().strftime("%d-%m-%Y")
     # date_var = '11-05-2021'
     URL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=" + district_id + "&date=" + date_var
@@ -32,9 +32,9 @@ while(1):
     flag = 0
 
     for center in data['centers']:
-        for session in center['sessions']:
-            if session['vaccine'] == 'COVISHIELD' and session['available_capacity'] > 0:
-                if center['center_id'] != 629727 and center['center_id'] != 629727:
+        if center['center_id'] != 629727 and center['center_id'] != 629727:
+            for session in center['sessions']:
+                if session['available_capacity'] > 0 and session['min_age_limit']<45:
                     alert(center['name'])
                     print(center['name'])
                     print(center['address'])
